@@ -70,7 +70,11 @@ function App() {
             Bring your imagination to life.
           </p>
         </div>
-        <button onClick={toggleTheme} className="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
+        <button 
+          onClick={toggleTheme} 
+          className="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
+          aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
+        >
           {theme === 'dark' ? <SunIcon /> : <MoonIcon />}
         </button>
       </header>

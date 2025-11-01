@@ -21,11 +21,33 @@ const ChevronRightIcon = () => (
 );
 
 
+const loadingMessages = [
+    "The story is writing itself...",
+    "Summoning the muses of creativity...",
+    "Inking the magical quill...",
+    "Weaving words into a new adventure...",
+    "Consulting the ancient story scrolls...",
+];
+
 const LoadingIndicator: React.FC = () => {
+    const [message, setMessage] = useState(loadingMessages[0]);
+
+    useEffect(() => {
+        const intervalId = setInterval(() => {
+            setMessage(prevMessage => {
+                const currentIndex = loadingMessages.indexOf(prevMessage);
+                const nextIndex = (currentIndex + 1) % loadingMessages.length;
+                return loadingMessages[nextIndex];
+            });
+        }, 2500);
+
+        return () => clearInterval(intervalId);
+    }, []);
+
     return (
-        <div className="text-center p-8 flex flex-col items-center justify-center">
+        <div className="text-center p-8 flex flex-col items-center justify-center animate-fade-in">
             <div className="w-16 h-16 border-4 border-dashed rounded-full animate-spin border-primary-light dark:border-primary-dark mb-4"></div>
-            <p className="text-gray-500 dark:text-gray-400">The story is writing itself...</p>
+            <p className="text-gray-500 dark:text-gray-400">{message}</p>
         </div>
     );
 };
@@ -109,15 +131,15 @@ export const StoryDisplay: React.FC<StoryDisplayProps> = ({ storyResult, isLoadi
                 />
                  {storyResult.imageUrl.length > 1 && (
                     <>
-                        <button onClick={prevImage} className="absolute left-2 top-1/2 -translate-y-1/2 bg-black/40 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity">
+                        <button onClick={prevImage} aria-label="Previous image" className="absolute left-2 top-1/2 -translate-y-1/2 bg-black/40 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity">
                             <ChevronLeftIcon />
                         </button>
-                        <button onClick={nextImage} className="absolute right-2 top-1/2 -translate-y-1/2 bg-black/40 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity">
+                        <button onClick={nextImage} aria-label="Next image" className="absolute right-2 top-1/2 -translate-y-1/2 bg-black/40 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity">
                             <ChevronRightIcon />
                         </button>
                          <div className="absolute bottom-4 left-0 right-0 flex justify-center gap-2">
                             {storyResult.imageUrl.map((_, index) => (
-                                <button key={index} onClick={() => setCurrentImageIndex(index)} className={`w-2 h-2 rounded-full ${index === currentImageIndex ? 'bg-white' : 'bg-white/50'}`}></button>
+                                <button key={index} onClick={() => setCurrentImageIndex(index)} aria-label={`Go to image ${index + 1}`} className={`w-2 h-2 rounded-full ${index === currentImageIndex ? 'bg-white' : 'bg-white/50'}`}></button>
                             ))}
                         </div>
                     </>
