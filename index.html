@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Didarul Story Box</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Lora:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+      body {
+        font-family: 'Lora', serif;
+      }
+    </style>
+    <script>
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['Lora', 'serif'],
+              display: ['Playfair Display', 'serif'],
+            },
+            colors: {
+              // Light Mode
+              'background-light': '#F8F7F4',
+              'text-light': '#1a1a1a',
+              'primary-light': '#4f46e5',
+              'primary-hover-light': '#4338ca',
+              'card-light': '#FFFFFF',
+              'border-light': '#e5e7eb',
+              // Dark Mode
+              'background-dark': '#111827',
+              'text-dark': '#d1d5db',
+              'primary-dark': '#818cf8',
+              'primary-hover-dark': '#6366f1',
+              'card-dark': '#1f2937',
+              'border-dark': '#374151',
+            },
+            animation: {
+              'fade-in': 'fadeIn 1s ease-in-out',
+              'blink-cursor': 'blink-cursor 1s step-end infinite',
+            },
+            keyframes: {
+              fadeIn: {
+                '0%': { opacity: '0', transform: 'translateY(10px)' },
+                '100%': { opacity: '1', transform: 'translateY(0)' },
+              },
+              'blink-cursor': {
+                'from, to': { 'border-color': 'transparent' },
+                '50%': { 'border-color': 'currentColor' },
+              }
+            }
+          },
+        },
+      }
+    </script>
+  <script type="importmap">
+{
+  "imports": {
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
+    "@google/genai": "https://aistudiocdn.com/@google/genai@^1.28.0",
+    "react": "https://aistudiocdn.com/react@^19.2.0",
+    "react/": "https://aistudiocdn.com/react@^19.2.0/"
+  }
+}
+</script>
+</head>
+  <body class="bg-background-light dark:bg-background-dark transition-colors duration-300">
+    <div id="root"></div>
+    <script type="module" src="/index.tsx"></script>
+  </body>
+</html>
